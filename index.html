@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sam 2  Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .question {
+            font-size: 30px;
+            margin: 10px 0;
+        }
+	#userAnswer {
+            font-size: 30px;
+            margin: 10px 0;
+        }
+        .input-container {
+            margin: 40px 0;
+	font-size: 30px;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Test Your Knowledge of Hebrew Verbs</h1>
+
+    <div id="question" class="question"></div>
+
+    <div class="input-container">
+        <input type="text" id="userAnswer" placeholder="Enter conjugation here..." />
+        <button onclick="checkAnswer()">Submit</button>
+    </div>
+
+    <div id="result"></div>
+    <button onclick="nextQuestion()">Next Question</button>
+<button onclick="lastQuestion()">Last Question</button>
+    <script>
+        // List of Hebrew verbs in different Binyanim (simplified)
+        const verbs = [
+            { verb: "פלל", binyan: "Hith and she prayed", conjugation: "וַתִּתְפַּלֵּל" },  // 2.1
+            { verb: "אמר", binyan: "Qal ַand she said", conjugation: "וַתֹּאמַר" },  // To go (Qal)
+            { verb: "עלצ", binyan: "Qal he rejoiced", conjugation: "עָלַץ" },  // To hear (Qal)
+            { verb: "רום", binyan: "Qal she exalted֗", conjugation: "רָמַה" },  // To act (Pi'el)
+            { verb: "רחב", binyan: "Qal he enlarged", conjugation: "רָחַב" },  // To dress (Pi'el)
+            { verb: "שׂמח", binyan: "Qal I rejoiced", conjugation: "שָׂמַחְתִּי" },  // To speak (Pi'el)
+            { verb: "רבה", binyan: "Hif'il (do not you pl) increase", conjugation: "תַּרְבּוּ" },  // To receive (Hif'il)
+            { verb: "דבר", binyan: "Piel ", conjugation: "תְדַבְּרוּ" },  // To save (Hif'il)
+            { verb: "שמר", binyan: "Hif'il", conjugation: "הִשְׁמִיר" },  // To guard (Hif'il)
+            { verb: "רצה", binyan: "Nif'al", conjugation: "נִרְצָה" },  // To want (Nif'al)
+            { verb: "נפגע", binyan: "Nif'al", conjugation: "נִפְגַּע" },  // To be harmed (Nif'al)
+            { verb: "קפץ", binyan: "Nif'al", conjugation: "נִקְפַּץ" },  // To jump (Nif'al)
+        ];
+
+        let currentVerbIndex = -1;
+
+        // Function to get  verb and display the question
+        function nextQuestion() {
+            currentVerbIndex = currentVerbIndex+1;
+            const verb = verbs[currentVerbIndex];
+            document.getElementById('question').innerHTML = 
+                `Conjugate the verb <b>${verb.verb}</b> in the <b>${verb.binyan}</b> binyan.`;
+            document.getElementById('userAnswer').value = "";
+            document.getElementById('result').innerHTML = "";
+        }
+ function lastQuestion() {
+            currentVerbIndex = currentVerbIndex-1;
+            const verb = verbs[currentVerbIndex];
+            document.getElementById('question').innerHTML = 
+                `Conjugate the verb <b>${verb.verb}</b> in the <b>${verb.binyan}</b> binyan.`;
+            document.getElementById('userAnswer').value = "";
+            document.getElementById('result').innerHTML = "";
+        }
+
+        // Function to check the user's answer
+        function checkAnswer() {
+            const userAnswer = document.getElementById('userAnswer').value.trim();
+            const correctAnswer = verbs[currentVerbIndex].conjugation;
+
+            if (userAnswer === correctAnswer) {
+                document.getElementById('result').innerHTML = "Correct! Well done!";
+                document.getElementById('result').style.color = "green";
+            } else {
+                document.getElementById('result').innerHTML = `Incorrect. The correct answer is: <b>${correctAnswer}</b>`;
+                document.getElementById('result').style.color = "red";
+            }
+        }
+
+        // Start the first question
+        nextQuestion();
+    </script>
+
+</body>
+</html>
